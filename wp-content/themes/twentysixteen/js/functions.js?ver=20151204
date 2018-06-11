@@ -1,0 +1,27 @@
+/* global screenReaderText */
+/**
+ * Theme functions file.
+ *
+ * Contains handlers for navigation and widget area.
+ */
+
+jQuery(document).ready(function(){
+	mobileNav();
+	initScrolled();
+	jQuery(window).scroll(initScrolled);
+});
+
+function mobileNav(){
+	jQuery('.mobile-opener').on('click', function(){
+		jQuery('html').toggleClass('menu-open');
+	})
+}
+
+function initScrolled() {
+	if(jQuery(document).scrollTop()>0){
+		jQuery('#header').addClass('scroll');
+	}
+	else{
+		jQuery('#header').removeClass('scroll');
+	}
+}

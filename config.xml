@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.selloc.screenster"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+<!-- versionCode is optional and Android only -->
+
+  <name>selenium-locators-best-practices</name>
+
+  <description>
+The skill of building robust Selenium locators is both science and art. This skill stems from a special kind of intuition that you can only attain while working on real-life projects. 
+  </description>
+
+  <author href="https://screenster.io"  >
+      Screenster
+  </author>
+
+</widget>

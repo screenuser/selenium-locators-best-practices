@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="https://screenster.io/xmlrpc.php">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic' rel='stylesheet' type='text/css'>
+	<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Selenium Locators Tutorial</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v7.5.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Selenium locators best practices for automation engineers. Building long-lasting Selenium is easy if you’re dealing with elements that have unique IDs. Unfortunately, having a unique ID at hand is not always the case."/>
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Selenium Locators Tutorial" />
+<meta property="og:description" content="Selenium locators best practices for automation engineers. Building long-lasting Selenium is easy if you’re dealing with elements that have unique IDs. Unfortunately, having a unique ID at hand is not always the case." />
+<meta property="og:url" content="https://screenster.io/selenium-locators-best-practices/" />
+<meta property="og:site_name" content="Screenster" />
+<meta property="article:publisher" content="https://www.facebook.com/screenster.io" />
+<meta property="article:section" content="UI testing tutorials" />
+<meta property="article:published_time" content="2017-08-04T15:51:12+00:00" />
+<meta property="article:modified_time" content="2018-05-21T10:09:42+00:00" />
+<meta property="og:updated_time" content="2018-05-21T10:09:42+00:00" />
+<meta property="og:image" content="https://screenster.io/wp-content/uploads/2017/01/selenium-locators.jpg" />
+<meta property="og:image:secure_url" content="https://screenster.io/wp-content/uploads/2017/01/selenium-locators.jpg" />
+<meta property="og:image:width" content="1130" />
+<meta property="og:image:height" content="629" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Selenium locators best practices for automation engineers. Building long-lasting Selenium is easy if you’re dealing with elements that have unique IDs. Unfortunately, having a unique ID at hand is not always the case." />
+<meta name="twitter:title" content="Selenium Locators Tutorial" />
+<meta name="twitter:site" content="@screenster_io" />
+<meta name="twitter:image" content="https://screenster.io/wp-content/uploads/2017/01/selenium-locators.jpg" />
+<meta name="twitter:creator" content="@screenster_io" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel="amphtml" href="amp/index.html" /><link rel='dns-prefetch' href='https://js.hs-scripts.com/' />
+<link rel='dns-prefetch' href='https://s.w.org/' />
+<link rel="alternate" type="application/rss+xml" title="Screenster &raquo; Feed" href="../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Screenster &raquo; Comments Feed" href="../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Screenster &raquo; Selenium locators best practices Comments Feed" href="feed/index.html" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/screenster.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.6"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='contact-form-7-css'  href='../wp-content/plugins/contact-form-7/includes/css/styles.css%3Fver=5.0.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='ez-icomoon-css'  href='../wp-content/plugins/easy-table-of-contents/vendor/icomoon/style.min.css%3Fver=1.7.css' type='text/css' media='all' />
+<link rel='stylesheet' id='ez-toc-css'  href='../wp-content/plugins/easy-table-of-contents/assets/css/screen.min.css%3Fver=1.7.css' type='text/css' media='all' />
+<style id='ez-toc-inline-css' type='text/css'>
+div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}
+</style>
+<link rel='stylesheet' id='genericons-css'  href='../wp-content/themes/twentysixteen/genericons/genericons.css%3Fver=3.4.1.css' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='../wp-content/themes/twentysixteen/style.css%3Fver=5.1.7.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wpgform-css-css'  href='../wp-content/plugins/wpgform/css/wpgform.css%3Fver=4.9.6.css' type='text/css' media='all' />
+<link rel='stylesheet' id='addtoany-css'  href='../wp-content/plugins/add-to-any/addtoany.min.css%3Fver=1.14.css' type='text/css' media='all' />
+<style id='addtoany-inline-css' type='text/css'>
+div.addtoany_share_save_container {
+opacity: 0.8;
+}
+</style>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery.js%3Fver=1.12.4'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min.js%3Fver=1.4.1'></script>
+<script type='text/javascript' src='../wp-content/plugins/add-to-any/addtoany.min.js%3Fver=1.0'></script>
+<script type='text/javascript' src='../wp-content/plugins/wonderplugin-lightbox/engine/wonderpluginlightbox.js%3Fver=4.0'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://screenster.io/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='../wp-json/index.html' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../xmlrpc.php%3Frsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.9.6" />
+<link rel="alternate" type="application/json+oembed" href="../wp-json/oembed/1.0/embed%3Furl=https:%252F%252Fscreenster.io%252Fselenium-locators-best-practices%252F" />
+<link rel="alternate" type="text/xml+oembed" href="../wp-json/oembed/1.0/embed%3Furl=https:%252F%252Fscreenster.io%252Fselenium-locators-best-practices%252F&amp;format=xml" />
+
+<script data-cfasync="false">
+window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};
+(function(d,s,a,b){a=d.createElement(s);b=d.getElementsByTagName(s)[0];a.async=1;a.src="https://static.addtoany.com/menu/page.js";b.parentNode.insertBefore(a,b);})(document,"script");
+</script>
+<link rel="icon" href="../wp-content/uploads/2016/03/cropped-favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="../wp-content/uploads/2016/03/cropped-favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="../wp-content/uploads/2016/03/cropped-favicon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://screenster.io/wp-content/uploads/2016/03/cropped-favicon-270x270.png" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MN2F9R8');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body class="post-template-default single single-post postid-1158 single-format-standard group-blog">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN2F9R8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div id="wrapper">
+	<header id="header">
+		<div class="container clearfix">
+		<a class="logo" href="../index.html">screenster</a>		
+			<div class="nav-container">
+				<span class="mobile-opener"><i></i></span>
+				<ul id="nav" class="menu"><li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-12"><a href="../index.html">Home</a></li>
+<li id="menu-item-313" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-313"><a href="../documentation/demo-automation-of-gmail-with-screenster/index.html">Documentation</a></li>
+<li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="../pricing/index.html">Pricing</a></li>
+<li id="menu-item-44" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="../support/index.html">Support</a></li>
+<li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-43"><a href="../blog/index.html">Blog</a></li>
+<li id="menu-item-1812" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1812"><a href="https://tests.screenster.io/authenticate/signin?remember=true">Login</a></li>
+<li id="menu-item-13" class="sign-link menu-item menu-item-type-custom menu-item-object-custom menu-item-13"><a href="https://tests.screenster.io/authenticate/signup">Sign up</a></li>
+</ul>			</div>
+		</div>
+
+	</header>
+
+<div id="main">	<div class="container">		<div class="blog-wrap">			
+
+
+	<aside id="secondary" class="sidebar" role="complementary">
+		<section id="enhancedtextwidget-2" class="widget widget_text enhanced-text-widget"><div class="textwidget widget-text"><section id="recent-posts-2" class="widget widget_recent_entries">
+    <h2>Related Posts</h2>
+    <ul>
+        <li>
+            <a href="../image-comparison-tool/index.html">Image and screenshot comparison tools for UI testing</a>
+            <span class="post-date">June 20, 2017</span>
+        </li>
+        <li>
+            <a href="../selenium-alternatives-for-testing-automation/index.html">Selenium alternatives for testing automation</a>
+            <span class="post-date">March 13, 2016</span>
+        </li>
+        <li>
+            <a href="../selenium-ide-chrome/index.html">How to run tests from Selenium IDE in Chrome</a>
+            <span class="post-date">March 2, 2017</span>
+        </li>
+<li>
+            <a href="../selenium-ide-alternatives-for-ui-regression-testing/index.html">Selenium IDE alternatives for UI regression testing</a>
+            <span class="post-date">February 3, 2017</span>
+        </li>
+<li>
+            <a href="../regression-testing/index.html">What is Regression Testing? Techniques and best practices
+</a>
+            <span class="post-date">May 3, 2017</span>
+        </li>
+    </ul>
+</section></div></section><div class="sticky-sidebar" style="text-align: center;"></br><span class="sidebar-cta">Want to try Screenster on the cloud?</span><a id="btn-try-online-sidebar" class="btn" href="https://tests.screenster.io/authenticate/signup?tryNow=true" target="_blank">Try Online</a></br></br></br></div>
+	</aside><!-- .sidebar .widget-area -->
+	<!--Sidebar sticky functionality-->
+	<script>
+jQuery( document ).ready(function() {
+  
+
+  var $sticky = jQuery('.sticky-sidebar');
+  var $stickyrStopper = jQuery('.sticky-stopper');
+  if (!!$sticky.offset()) { // make sure ".sticky" element exists
+
+    var generalSidebarHeight = $sticky.innerHeight();
+    var stickyTop = $sticky.offset().top;
+    var stickOffset = 100;
+    
+    
+    jQuery(window).scroll(function(){ // scroll event
+      var windowTop = jQuery(window).scrollTop(); // returns number
+var stickyStopperPosition = $stickyrStopper.offset().top;
+var stopPoint = stickyStopperPosition - generalSidebarHeight - stickOffset-78;
+var diff = stopPoint + stickOffset;
+      if (stopPoint < windowTop) {
+          $sticky.css({ position: 'absolute', top: diff });
+      } else if (stickyTop < windowTop+stickOffset) {
+          $sticky.css({ position: 'fixed', top: stickOffset });
+      } else {
+          $sticky.css({position: 'absolute', top: 'initial'});
+      }
+    });
+
+  }
+});
+</script>
+
+
+
+
+			<div class="blog-content">		
+<article id="post-1158" class="post-1158 post type-post status-publish format-standard has-post-thumbnail hentry category-ui-testing-tutorials">
+	<h1>Selenium locators best practices</h1>	<span class="post-date">August 4, 2017</span>
+
+    
+	
+	<div class="post-thumbnail">
+		<img width="1130" height="629" src="../wp-content/uploads/2017/01/selenium-locators.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="https://screenster.io/wp-content/uploads/2017/01/selenium-locators.jpg 1130w, https://screenster.io/wp-content/uploads/2017/01/selenium-locators-300x167.jpg 300w, https://screenster.io/wp-content/uploads/2017/01/selenium-locators-768x427.jpg 768w, https://screenster.io/wp-content/uploads/2017/01/selenium-locators-1024x570.jpg 1024w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 984px) 60vw, (max-width: 1362px) 62vw, 840px" />	</div><!-- .post-thumbnail -->
+
+	
+	<div class="content">
+		<span class="entry-content"><p>The skill of building robust <strong>Selenium locators</strong> is both science and art. This skill stems from a special kind of intuition that you can only attain while working on real-life projects. Most QAs agree it takes months, sometimes years, to develop this intuition.</p>
+<p><span id="more-1158"></span></p>
+<p>So what is the big deal with locators in Selenium? Why do they have to be such a pain point?</p>
+<p>Building locators that last is easy if you’re dealing with elements that have unique IDs. Things are still fairly straightforward if you can add missing IDs every time you need them. But is this a realistic expectation in real-life projects? Sadly, no.</p>
+<p>In real life, we always stumble across hard-to-reach stuff. Dynamically generated IDs, duplicate IDs, missing IDs, renamed IDs, pieces of legacy code, you name it. More often than not, you don’t get the luxury of asking a developer to assign an ID to each element you target. In situations of this sort, the efficiency of test automation will depend on your knowledge of Selenium locators and best practices related to them.</p>
+<p>Let’s have a quick look at the widespread tactics for building locators in Selenium. We’ll begin with a brief overview of locator types. Once we’re through with these, this post will proceed to exploring the advantages, as well as the pitfalls associated with the use of Selenium locators.</p>
+<h2>Simple locators in Selenium</h2>
+<p>Locators in Selenium typically use CSS or XPath selectors to target on-page elements. In addition, the Selenium API offers a slew of convenience methods that prove handy for simple cases. The latter include targeting UI elements directly by their HTML tags and attributes like id, class, name, etc. Below, you will find several widespread Selenium locator tactics based on the use of these convenience methods.</p>
+<h3>Identifier (ID) locators</h3>
+<p>Static unique ID attributes are the most straightforward and future-proof way to target HTML elements. For this reason, it’s always preferable to ask your developers to add IDs to key elements like menus, buttons, content sections, etc. Even if you’ll end up targeting their descendants, working with parent-child locators in Selenium is much easier if the parent has a unique ID.</p>
+<p>As far as simple ID-based locators go, here’s what a typical example looks like code-wise:</p>
+<p><script src="https://gist.github.com/screenster/3ff7437ff2099c75974c9676e1d1bd2f.js"></script></p>
+<p>Static ID-based Selenium locators are short, simple, and independent from page structure. They don’t break if you add or remove ancestors, descendants or siblings to the element you’re targeting.</p>
+<p>The only two ways to mess up an ID-based Selenium locator is to rename the ID or have duplicate IDs on the same page. It goes without saying that dynamic IDs that change with every page load don’t work the same way as static IDs.</p>
+<h3>Name locators</h3>
+<p>Name attributes prove handy when working with forms. Take a look at this example of a name-based locator in Selenium:</p>
+<p><script src="https://gist.github.com/screenster/502e3b53e93d5e423f5f18eb1d17916a.js"></script></p>
+<p>Like IDs, name-based Selenium locators don’t depend on page structure. This means the locators for firstName and lastName won’t break if you relocate the UI elements they target.</p>
+<p>On the downside, name attribute values don’t have to be unique. It is not uncommon, for instance, for all radio buttons in a form to share the same name:</p>
+<p><script src="https://gist.github.com/screenster/08327a821417963f06ba802a33b11421.js"></script></p>
+<p>In the example above, the <code>gender</code> variable will store the first element with the name gender. Obviously, placing another element above the one your locator is targeting will make that locator target a different element. As a consequence, the <code>gender</code> variable will store the wrong value, and it will pass this wrong value down the line. In some cases, issues of this sort are difficult to trace.</p>
+<h3>Link text and partial link text locators</h3>
+<p><strong>Link text locators in Selenium</strong> provide a working solution for test cases that cover navigation flows. Check out this example of a Selenium locator that targets the link text of a navigation menu:<br />
+<script src="https://gist.github.com/screenster/8cf908289dcdebbd4beda7f3fa3c859f.js"></script></p>
+<p>In case you’re not sure about the exact wording of your anchor text, <strong>Partial Link Text</strong> is an option:</p>
+<p><script src="https://gist.github.com/screenster/4868e676db8aa273786828de922d7700.js"></script></p>
+<p>The example above illustrates a typical case. When building a menu for a website, developers can’t be 100% sure about the anchor text. For instance, they may start with <i>“Contact”</i> and rename it to <i>“Contact us”</i> at a later point. In cases like this one, Selenium locators that target partial link text can help you minimize the risk of needing to rewrite your test. </p>
+<p>Obviously, link text locators in Selenium only work with links that have anchor text, and they will break if you completely rewrite that text. In addition, locators of this type are of little use if you have two or more links with duplicate anchor text.</p>
+<h3>Tag name locators</h3>
+<p>Targeting UI elements by their HTML rarely results in a robust UI test. Still, doing this might be viable if you’re working with less common HTML tags. In other words, using tag names as the basis for Selenium locators will work if you’re 100% sure your page contains one and only one element with a given tag. A good example of when a tactic of this sort might work is a tag name locator that targets a <code>&lt;select&gt;</code> element:</p>
+<p><script src="https://gist.github.com/screenster/f69144c437382a18cc21b6948306d3a2.js"></script></p>
+<p>Just like other other simple locators in Selenium, this one will target the first and uppermost HTML element with the <code>&lt;select&gt;</code> tag. Should someone place a different element of the same type above this one, your code will inevitably break.</p>
+<h3>Class name locators</h3>
+<p>Class names are more specific than tag names yet less specific than name attributes. The Selenium locator in the example below will target the first (uppermost) menu item with the specified class name and ignore the remaining ones:</p>
+<p><script src="https://gist.github.com/screenster/e88f7218500a9cf642c55f01b57ab035.js"></script></p>
+<p>Knowing that the same class name can be shared by dozens of elements on a single page, using class names for simple locators makes little sense. This said, targeting the class attribute is a lot more common in more complex Selenium locators that target multiple elements by their relations (e.g. ancestors, descendants, siblings). Locators of this sort revolve around CSS and XPath selectors.</p>
+<h2>CSS and XPath selectors</h2>
+<p>Non-unique targeting criteria like class names, tag names, name attributes and link text offer little precision or predictability. Whenever you use anything except unique IDs, you can’t be sure that your locator will always target what you think it targets.</p>
+<p>To make Selenium locators more precise, you’d want to specify the relations with the elements on the same page using <a href="https://www.red-gate.com/simple-talk/wp-content/uploads/imported/1269-Locators_table_1_0_2.pdf?file=4937" target="_blank" rel="nofollow">CSS and Xpath selectors</a>. Let’s begin with the former.</p>
+<h3>CSS selectors</h3>
+<p>There are over <a href="https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048" target="_blank" rel="nofollow">30 CSS selectors</a> that front-end developers use when styling web pages. Given that CSS locators in Selenium use the same syntax, getting familiar with the most widely-used selectors will definitely boost your QA automation skills.</p>
+<p>In the example below, the CSS locator targets the first li item in the same navigation menu:</p>
+<p><script src="https://gist.github.com/screenster/4b21e03704e5fa111b33b90f88501801.js"></script></p>
+<p>The advantage of this Selenium locator over capturing the <code>nav__item</code> class value is that it uses a unique ID. Should anyone add another element with the <code>nav__item</code> class above the menu, the test won’t break. Adding another first element inside of the menu, on the other hand, will break the test.</p>
+<h3>XPath selectors</h3>
+<p>When it comes to working with parent-child structures, XPath offers a powerful alternative to CSS locators. This type of Selenium locators lets you access UI elements using absolute and relative paths to them. Here’s how you can use absolute and relative XPath when targeting the first navigation menu item from the example above:</p>
+<p><strong>Absolute XPath:</strong><br />
+<script src="https://gist.github.com/screenster/1f507c699c4efa89716f01b614df193a.js"></script></p>
+<p><strong>Relative XPath:</strong><br />
+<script src="https://gist.github.com/screenster/4a204dd582d3974e73ab52c2b183b13b.js"></script></p>
+<p>Comparing the two, relative XPath is shorter and more specific, which makes it less brittle. Should anyone add a parent element to the <code>&lt;ul&gt;</code>, the absolute selector will cease to function. A relative one will still work.</p>
+<h2>Accessing element via DOM</h2>
+<p>Yet another way to access HTML elements is via the Document Object Model, the JavaScript representation of page structure. Targeting the same first item in the navigation menu from the example above may look like this in DOM:<br />
+<script src="https://gist.github.com/screenster/409f1f0b9d14f74670438a2fbcc89e95.js"></script></p>
+<p>The <code>.getElementsByClassName()</code> method from the example above creates a collection of all elements with the <code>nav__item</code> class. After that, you need to specify what item of the list you’re targeting. In our case, it’s the first item of the <code>navItems</code> list.</p>
+<p>It’s easy to see that this locator shares the main weakness of class-based Selenium locators. Should anyone make another item the first one, your text will cease to work as expected.</p>
+<h2>Selenium locators best practices</h2>
+<p>Knowing about locators in Selenium is one thing, but knowing how to use them is quite another. Being able to build a robust locator begins with understanding of what a robust locator is. Here are three criteria to keep in mind:</p>
+<ul>
+<li><b>Robust locators are as simple and small as possible.</b> The more elements a locator contains, the higher the chances it’ll break because of the change in the page structure.</li>
+<li><b>Robust locators still work after you change the properties of a UI element.</b> Relying on frequently-changed attributes like <a href="http://getbem.com/naming/" target="_blank" rel="nofollow">modifier classes</a> (<code>menu__item--red</code>) is never a good practice.</li>
+<li><b>Robust locators still work after you change the UI elements around the element you target.</b> Whenever you use a non-unique attribute, chances are the locator will break because someone added an element with that same attribute above.</li>
+</ul>
+<p>So how do you build reliable locators? Here are several best practices to keep in mind:</p>
+<h3>Preferred selector order : id &gt; name &gt; css &gt; xpath</h3>
+<p>IDs are unique, which makes them perfect candidates for robust Selenium locators. Names don’t have to be unique, yet they often are. In any case, duplicate name attributes are less common than duplicate classes. When IDs and unique name attributes aren’t available, though, you’d have to go with more brittle, structure-dependent locators.</p>
+<h3>Target the nearest ancestor with an ID</h3>
+<p>If the element you’re targeting doesn’t have a unique ID, chances are its parent or close ancestor has it. If that’s your case, using a CSS selector that includes that element is a good practice, as long as your locator remains fairly short. If you’re targeting a close descendant with a unique ID, XPath should do the job.</p>
+<h3>When working with dynamic IDs, target the stable part</h3>
+<p>Static IDs are great, but what if you’re working with a framework that relies on autogenerated IDs? If the dynamic ID has a static part, there’s still hope:</p>
+<p><script src="https://gist.github.com/screenster/9fc449f34d3949c1e8a35fb64e48e322.js"></script></p>
+<p>The XPath selector from this example looks for an ul with an id attribute value that contains the word “navigation”.</p>
+<h2>How Screenster deals with selectors</h2>
+<p>No matter how great your Selenium selector is, it is always at risk of breaking because of a new change introduced to the UI. So how do you build selectors that can withstand UI changes?</p>
+<p>One way to do this is to write a failover algorithm for the cases when the stored selector gets broken. This nifty algorithm would have to find all possible substitutes for the missing id or class, and then select the best match. It is NOT a simple matter!</p>
+<p>The use of a failover algorithm is one of the key features of our very own product <a href="http://agileengine.com/" target="_blank">Screenster</a>. When scanning a UI, Screenster builds a list of all possible locator criteria for each element. Basically, it generates several selectors to make sure the test won&#8217;t break after someone has renamed some ID or class, or moved an element outside of its parent <code>div</code>.</p>
+<p>Let’s see how it works with the following example:<br />
+<script src="https://gist.github.com/screenster/8f3047faf7353a6f749743dd1f9daf8c.js"></script></p>
+<p>Using a Class Name locator in this example is an option, but the locator will break should anyone add another “article” element above this one. The obvious alternative of a parent-child locator would be just as fragile.</p>
+<p>Instead of relying on a single class or parent-child pair, Screenster will automatically generate a list of all selectors for the element. This list includes the tag name and both classes of the targeted element, as well as the tag names and classes of its ancestors and descendants. Should one of the locators get broken, the platform will use a different one:</p>
+<p><script src="https://gist.github.com/screenster/3bbd25e699a8acc4d05997c1fb9abd75.js"></script></p>
+<p>The platform builds a tree of DOM ancestors and descendants for each element, and updates these trees whenever someone changes the UI. Basically, it handles all the locator-related work automatically. It certainly saves you a ton of time.</p>
+<p>The great thing about this approach is that it can handle cases that involve broken or dynamic IDs:</p>
+<p><script src="https://gist.github.com/screenster/cf790fdf492e0b52e2dcec42faaf3439.js"></script></p>
+<p>WebElement navItemHome = driver.findElement(By.<b>cssSelector</b>(&#8220;#header <b>.navigation li:first-child</b>&#8220;));
+</pre>
+<p>The example above illustrates a complex case. There are two elements with identical class names and link texts, so you need something unique to create robust locator for the first one. The ID of its ancestor (“header”) seems like a viable option. But what if something happens with that ID? With Screenster, this scenario is not a problem.</p>
+<p><script src="https://gist.github.com/screenster/6481b985a520d204ed31a5dd4da365f3.js"></script></p>
+<p>Should anyone rename or delete the ID, the platform will simply build a new locator. It’ll use the non-duplicate <code>header__nav</code> class name of the li’s parent <code>ul</code>. It’s that simple.</p>
+<p>As you see, selectors don’t have to be complicated. In fact, you might even forget about the existence of selectors when using a testing automation platform like Screenster.</p>
+<h2>Care to learn more?</h2>
+<p>There’s a bunch of other useful functionality, in addition to handling Selenium locators for you. Here’s a short list of features that help us streamline UI testing:</p>
+<ul>
+<li><strong>Verification of all UI elements.</strong> Mose tools require explicit assertions (via code or clicks), which limits the scope of UI tests. Screenster verifies all on-page elements for each step. This way the platform will detect bugs in all elements, even if your test doesn’t target them explicitly.</li>
+<li><strong>Intelligent visual testing.</strong> When running visual comparison, Screenster zooms in on individual UI elements. It performs pixel-perfect comparison and DOM comparison for each element. With this approach, UI tests are more precise, and have fewer false positives compared to pixel matching.</li>
+<li><strong>Codeless test editing.</strong> Editing auto-generated WebDriver code is unproductive, which is why Screenster keeps test editing codeless. </li>
+<li><strong>Web-based UI testing.</strong>  Screenster doesn’t require a desktop app. Unlike other mainstream cloud tools, we don’t use plugins. Instead, all functionality is available in the format of a web application running on a cloud or local server.</li>
+<li><strong>Compatibility with custom Selenium code and JavaScript.</strong> Screester offers full support of Selenium and JavaScript for custom-written tests and test steps. This feature allows our users to extend recorded tests or run their existing Selenium and JavaScript tests in Screenster.</li>
+<li><strong>Automatic waits.</strong> Would you tinker with explicit and implicit waits if you didn’t have to? Screenster automatically determines optimal waiting time for each element, turning timeouts into a non-issue.</li>
+<li><strong>Smart handling of dynamic regions.</strong> Screenster can detect ads, timestamps, gifs, and other dynamic elements and enables you to manage them with two mouse clicks. </li>
+</ul>
+<p>If the idea of codeless, easy-to-create and robust UI tests sounds exciting, there’s an easy way to find out if Screenster can live up to your expectations. Hit the orange button below this post and try the free version of Screenster online. Try it with your website or web app, and you’ll see that UI testing can be fun. Also, we’d love to hear your feedback!<br />
+<!-- padding:60px 0; background-color:#eee; border-radius:5px--><br />
+
+<div class="sticky-stopper"></div>
+<br />
+
+<div style="text-align: center; padding: 60px 0; background-color: #eee; border-radius:5px;">
+<h2>Want to try Screenster on the cloud?</h2>
+<a id="btn-try-online" class="btn" href="https://tests.screenster.io/authenticate/signup?tryNow=true" target="_blank">Try Online</a>
+
+</div>
+<br />
+&nbsp;<br />
+&nbsp;</p>
+</span><div class="hatom-extra"><span class="entry-title">Selenium locators best practices</span> was last modified: <span class="updated"> May 21st, 2018</span> by <span class="author vcard"><span class="fn">Ilya Goncharov</span></span></div><div class="addtoany_share_save_container addtoany_content addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list" data-a2a-url="https://screenster.io/selenium-locators-best-practices/" data-a2a-title="Selenium locators best practices"><a class="a2a_button_facebook" href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Fscreenster.io%2Fselenium-locators-best-practices%2F&amp;linkname=Selenium%20locators%20best%20practices" title="Facebook" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_twitter" href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Fscreenster.io%2Fselenium-locators-best-practices%2F&amp;linkname=Selenium%20locators%20best%20practices" title="Twitter" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_linkedin" href="https://www.addtoany.com/add_to/linkedin?linkurl=https%3A%2F%2Fscreenster.io%2Fselenium-locators-best-practices%2F&amp;linkname=Selenium%20locators%20best%20practices" title="LinkedIn" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_google_plus" href="https://www.addtoany.com/add_to/google_plus?linkurl=https%3A%2F%2Fscreenster.io%2Fselenium-locators-best-practices%2F&amp;linkname=Selenium%20locators%20best%20practices" title="Google+" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_email" href="https://www.addtoany.com/add_to/email?linkurl=https%3A%2F%2Fscreenster.io%2Fselenium-locators-best-practices%2F&amp;linkname=Selenium%20locators%20best%20practices" title="Email" rel="nofollow noopener" target="_blank"></a></div></div>	</div><!-- .content -->
+	
+	<div id="single_post_pagination">
+		<a href="../web-automation-tools/index.html" rel="prev">&laquo; 20+ web automation tools to consider for your next projects</a> <a href="../selenium-locators-best-practices-7-helpful-tips-for-ui-testers/index.html" rel="next">UI testing tips: Selenium locators best practices; &raquo</a>	</div>
+	
+	<footer class="footer">
+			</footer><!-- footer -->
+
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			1 thought on &ldquo;Selenium locators best practices&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<!--<li id="comment-129" class="pingback even thread-even depth-1">
+			<div class="comment-body">
+				Pingback: <a href='https://screenster.io/regression-testing-tools/' rel='external nofollow' class='url'>9 regression testing tools for web GUI development</a> 			</div>-->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="https://screenster.io/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /><label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1158' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+			</div>		</div>	</div></div>
+<footer id="footer">
+	<div class="footer-holder">
+		<div class="container clearfix">
+							<section id="nav_menu-2" class="col-md-4 footer-box widget_nav_menu"><h3>Screenster</h3><div class="menu-screenster-menu-container"><ul id="menu-screenster-menu" class="menu"><li id="menu-item-307" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-307"><a href="../documentation/demo-automation-of-gmail-with-screenster/index.html">Documentation</a></li>
+<li id="menu-item-302" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-302"><a href="../documentation/local-installation/index.html">Local Installation</a></li>
+<li id="menu-item-2258" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2258"><a href="../documentation/demo-automation-of-gmail-with-screenster/index.html">Demo: Automation of Gmail with Screenster</a></li>
+<li id="menu-item-2259" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2259"><a href="../documentation/recording-tests/index.html">Recording Tests</a></li>
+<li id="menu-item-2260" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2260"><a href="../documentation/advanced-features/index.html">Advanced Features</a></li>
+<li id="menu-item-57" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-57"><a href="../pricing/index.html">Pricing</a></li>
+<li id="menu-item-56" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-56"><a href="../support/index.html">Support</a></li>
+<li id="menu-item-366" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-366"><a href="../blog/index.html">Blog</a></li>
+<li id="menu-item-367" class="sign-link menu-item menu-item-type-custom menu-item-object-custom menu-item-367"><a href="https://tests.screenster.io">My Tests</a></li>
+</ul></div></section>										<section id="nav_menu-3" class="col-md-4 footer-box widget_nav_menu"><h3>Community</h3><div class="menu-community-menu-container"><ul id="menu-community-menu" class="menu"><li id="menu-item-59" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-59"><a target="_blank" href="https://groups.google.com/forum/#!forum/screenster">Google Group</a></li>
+<li id="menu-item-283" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-283"><a href="https://www.facebook.com/screenster.io">Facebook</a></li>
+<li id="menu-item-284" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-284"><a href="https://twitter.com/screenster_io">Twitter</a></li>
+<li id="menu-item-285" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-285"><a href="https://www.linkedin.com/company/screenster">LinkedIn</a></li>
+<li id="menu-item-286" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-286"><a href="https://plus.google.com/u/0/b/102437454572601473183/102437454572601473183">Google+</a></li>
+<li id="menu-item-1521" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1521"><a href="https://www.youtube.com/channel/UCYAf5YzOoXZr8n7r1TEaHlw">YouTube</a></li>
+</ul></div></section>										<section id="nav_menu-4" class="col-md-4 footer-box widget_nav_menu"><h3>Company</h3><div class="menu-company-menu-container"><ul id="menu-company-menu" class="menu"><li id="menu-item-66" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66"><a href="../about-us/index.html">About Us</a></li>
+<li id="menu-item-68" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68"><a href="../privacy-policy/index.html">Privacy Policy</a></li>
+<li id="menu-item-67" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"><a href="../license-agreement/index.html">License Agreement</a></li>
+<li id="menu-item-1941" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1941"><a href="../contact-us/index.html">Contact Us</a></li>
+</ul></div></section>					</div>
+	</div>
+	<div class="copyright">
+
+<div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
+    <!-- Breadcrumb NavXT 6.1.0 -->
+<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Screenster." href="../index.html" class="home"><span property="name">Screenster</span></a><meta property="position" content="1"></span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Blog." href="../blog/index.html" class="post-root post post-post"><span property="name">Blog</span></a><meta property="position" content="2"></span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to the UI testing tutorials category archives." href="../category/ui-testing-tutorials/index.html" class="taxonomy category"><span property="name">UI testing tutorials</span></a><meta property="position" content="3"></span> &gt; <span property="itemListElement" typeof="ListItem"><span property="name">Selenium locators best practices</span><meta property="position" content="4"></span></div>
+		<div class="container">
+
+			2018 &copy; <a style="color:#fff;" target="_blank" href="../index.html">Screenster</a>, LLC. All rights reserved.
+
+		</div>
+	</div>
+</footer>
+
+	<div itemscope itemType="http://schema.org/BlogPosting">
+		<meta itemprop="inLanguage" content="en-US"/>
+		<meta itemprop="headline" content="Selenium locators best practices">
+		<meta itemprop="mainEntityOfPage" content="https://screenster.io/selenium-locators-best-practices/"/>
+		<meta itemprop="datePublished" content="2017-08-04">
+		<meta itemprop="dateModified" content="2018-05-21">
+		<meta itemprop="articleBody" content="The skill of building robust Selenium locators is both science and art. This skill stems from a special kind of intuition that you can only attain while working on real-life projects. Most QAs agree it takes months, sometimes years, to develop this intuition. So what is the big deal with locators in Selenium? Why do &hellip; Continue reading "Selenium locators best practices"">
+	  <div itemprop="image" itemscope="" itemtype="https://schema.org/ImageObject"/>
+		<meta itemprop="url" content="https://screenster.io/wp-content/uploads/2017/01/selenium-locators-300x167.jpg">
+		<meta itemprop="width" content="300">
+		<meta itemprop="height" content="300">
+	  </div>
+	  <div itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<meta itemprop="name" content="Ilya Goncharov">
+	  </div>
+	  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+		<meta itemprop="name" content="Screenster">
+		<meta itemprop="url" href="https://screenster.io">
+		<meta itemprop="description" content="Visual UI Testing Automation">
+		<span itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+		  <meta itemprop="image" content="">
+		  <meta itemprop="url" content="">
+		  <meta itemprop="width" content="300">
+		  <meta itemprop="height" content="300">
+		</span>
+	</div>
+    
+  <div id="wonderpluginlightbox_options" data-skinsfoldername="skins/default/"  data-jsfolder="https://screenster.io/wp-content/plugins/wonderplugin-lightbox/engine/" data-autoslide="false" data-slideinterval="5000" data-showtimer="true" data-timerposition="bottom" data-timerheight="2" data-timercolor="#dc572e" data-timeropacity="1" data-showplaybutton="true" data-alwaysshownavarrows="false" data-bordersize="0" data-showtitleprefix="true" data-responsive="true" data-fullscreenmode="true" data-closeonoverlay="true" data-videohidecontrols="false" data-titlestyle="bottom" data-imagepercentage="100" data-enabletouchswipe="true" data-autoplay="true" data-html5player="true" data-overlaybgcolor="#000" data-overlayopacity="0.8" data-defaultvideovolume="1" data-bgcolor="#000" data-borderradius="0" data-thumbwidth="96" data-thumbheight="72" data-thumbtopmargin="12" data-thumbbottommargin="12" data-barheight="50" data-showtitle="false" data-titleprefix="%NUM / %TOTAL" data-titlebottomcss="color:#333; font-size:14px; font-family:Armata,sans-serif,Arial; overflow:hidden; text-align:left;" data-showdescription="false" data-descriptionbottomcss="color:#333; font-size:12px; font-family:Arial,Helvetica,sans-serif; overflow:hidden; text-align:left; margin:4px 0px 0px; padding: 0px;" data-titleinsidecss="color:#fff; font-size:16px; font-family:Arial,Helvetica,sans-serif; overflow:hidden; text-align:left;" data-descriptioninsidecss="color:#fff; font-size:12px; font-family:Arial,Helvetica,sans-serif; overflow:hidden; text-align:left; margin:4px 0px 0px; padding: 0px;" data-videobgcolor="#000" data-html5videoposter="" data-responsivebarheight="false" data-smallscreenheight="415" data-barheightonsmallheight="48" data-notkeepratioonsmallheight="false" data-wonderplugin-lightbox-options="f305a0a9fd" data-_wp_http_referer="/wp-admin/admin.php?page=wonderplugin_lightbox_show_options" style="display:none;"></div><div class="wonderplugin-engine"><a href="http://www.wonderplugin.com/wordpress-lightbox/" title="WordPress Image Lightbox Plugin">WordPress Image Lightbox Plugin</a></div><link rel='stylesheet' id='rainmaker_form_style-css'  href='../wp-content/plugins/icegram-rainmaker/assets/css/form.css%3Fver=0.33.css' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/screenster.io\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../wp-content/plugins/contact-form-7/includes/js/scripts.js%3Fver=5.0.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var leadin_wordpress = {"userRole":"visitor","pageType":"post","leadinPluginVersion":"6.1.5"};
+/* ]]> */
+</script>
+<script type='text/javascript' async defer src='https://js.hs-scripts.com/4371298.js?ver=4.9.6'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../wp-content/themes/twentysixteen/js/functions.js%3Fver=20151204'></script>
+<script type='text/javascript' src='../wp-includes/js/wp-embed.min.js%3Fver=4.9.6'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var rm_pre_data = {"ajax_url":"https:\/\/screenster.io\/wp-admin\/admin-ajax.php","rm_nonce_field":"8588a73fa9"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../wp-content/plugins/icegram-rainmaker/assets/js/main.js%3Fver=0.33'></script>
+
+</body>
+</html>
